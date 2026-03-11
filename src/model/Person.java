@@ -2,9 +2,9 @@ package model;
 // mainigie, setteri un getteri panemsi no studne classes
 public class Person {
 	//1. mainigie
-	private String name;
-	private String surname;
-	private String personCode;
+	protected String name; //no private uz protected lai varetu izsaukt name utt ieksa to string
+	protected String surname;
+	protected String personCode;
 	
 	//2. getteri
 	public String getName() {
@@ -45,13 +45,24 @@ public class Person {
 	}
 	
 	//4. no args constructor
-	
+	public Person() {
+		setName("Liga");
+		setSurname("Jauka");
+		setPersonCode("00923-12345");
+	}
 	
 	//5. args constructor
-	
+	public Person(String inputName, String inputSurname, String inputPersonCode) {
+		setName(inputName);
+		setSurname(inputSurname);
+		setPersonCode(inputPersonCode);
+	}
 	
 	//6. to string 
-	
+	public String toStrin() {
+		String result = name + " " + surname + " (" + personCode + ")";
+		return result;
+	}
 	
 	
 	
