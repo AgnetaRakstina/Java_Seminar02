@@ -67,7 +67,40 @@ public class VeA_IS {
 			System.out.println(tempS);
 		}
 		
+		
 	}
+		//CRUD - Create, Retrieve, Update, Delete
+		
+		//C - create
+	public static void createStudent(String inputName, String inputSurname, String inputPersonCode) throws Exception {
+		//TODO - parbaudit ienakosos parametrus	
+		for(Student tempS : allStudents) {
+			if(tempS.getPersonCode().equals(inputPersonCode)) { //parbauda vai dotais personas kods eksiste, ir pareizs
+				throw new Exception("Tads students jau eksiste"); //VAJADZIGS PRIEKS TESTA
+			}
+		}
+		
+		Student newStudent = new Student(inputName, inputSurname, inputPersonCode);
+		allStudents.add(newStudent);
+	}
+	
+	//R - retrieve
+	public static Student getStudentById(long id) throws Exception {
+		
+		if(id < 0) {
+			throw new Exception("Id nevar but negativs");
+		}
+		
+		for (Student tempS : allStudents) {
+			if(tempS.getStudId() == id) {
+				return tempS;
+			}
+		}
+		throw new Exception("Students ar id " + id + " neeksiste!");
+
+	}
+	
+	
 	
 	
 	
