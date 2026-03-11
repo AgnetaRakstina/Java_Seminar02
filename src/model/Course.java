@@ -1,6 +1,5 @@
 package model;
 
-import model.enums.ProfDegree;
 
 public class Course {
 	//1. mainigie===========================================================

@@ -3,6 +3,7 @@ package main;
 import model.Professor;
 import model.Student;
 import model.Course;
+import model.Grade;
 import model.enums.ProfDegree;
 
 public class VeA_IS {
@@ -35,6 +36,13 @@ public class VeA_IS {
 		Course course3 = new Course("Matematiska analize", (byte)6, prof3);
 		System.out.println(course3);
 		
+		System.out.println("=========== GRADES ===========");
+		Grade grade1 = new Grade();
+		System.out.println(grade1);
+		Grade grade2 = new Grade(10, stud1, course1);
+		System.out.println(grade2);
+		Grade grade3 = new Grade(9, stud2, course2);
+		System.out.println(grade3);
 		
 	}
 	
