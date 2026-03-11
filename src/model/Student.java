@@ -1,7 +1,7 @@
 package model;
 
 public class Student {
-	//1. mainigie
+	//1. mainigie===========================================================
 	private long studId;
 	private String name;
 	private String surname;
@@ -11,7 +11,7 @@ public class Student {
 	private static long counter = 0;
 	
 	
-	//2. get funkcija
+	//2. get funkcija===========================================================
 	public long getStudId() {
 		return studId;
 	}
@@ -25,7 +25,7 @@ public class Student {
 		return personCode;
 	}
 	
-	//3. set funkcija
+	//3. set funkcija===========================================================
 	public void setStudId() {
 		studId = counter;
 		counter++;
@@ -58,7 +58,7 @@ public class Student {
 	}
 	
 
-	//4.1. bezagrumenta konstruktors
+	//4.1. bezagrumenta konstruktors===========================================================
 	public Student() {
 		setStudId();
 		setName("Janis");
@@ -68,7 +68,7 @@ public class Student {
 	
 
 	
-	//4.2 argumenta konstruktors
+	//4.2 argumenta konstruktors===========================================================
 	public Student(String inputName, String inputSurname, String inputPersonCode) {
 		setStudId();
 		setName(inputName);
@@ -77,7 +77,7 @@ public class Student {
 	}
 	
 	
-	//5. toString fuinkcijas, parraksta
+	//5. toString fuinkcijas, parraksta===========================================================
 	@Override //jaraksta (nav obligati)
 	public String toString() {
 		//piemers 1: Karina Skirmante ()

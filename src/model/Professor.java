@@ -11,9 +11,9 @@ public class Professor {
 	private String personCode;
 	private ProfDegree degree;
 	
-	private static long counter = 0;
+	private static long counter = 1000;
 	
-	//2. getters
+	//2. getters===========================================================
 	public long getProfId() {
 		return profId;
 	}
@@ -31,31 +31,32 @@ public class Professor {
 	}
 	
 	
-	// Setters
+	// Setters===========================================================
 	public void setProfId() {
 		profId = counter;
 		counter++;
 	}
 	String msg = ""; //parbaudes
 	public void setName(String inputName) {
-		if((inputName != null) && (!inputName.isEmpty()) && (inputName.matches("[A-z]{1}[a-z]{2,15}?")) ) {
+		if((inputName != null) && (!inputName.isEmpty()) && (inputName.matches("[A-Z]{1}[a-z]{2,15}([ ]{1}[A-Z]{1}[a-z]{2,15})?"))    ) {
 			name = inputName;
 		}
 		else {
 			name = "Unknown";
 		}
 	}
-	public void setSurname(String inputSurame) {
-		if((inputSurame != null) && (!inputSurame.isEmpty()) && (inputSurame.matches("[A-Z]{1}[a-z]{2,15}([-]{1}[A-Z]{1}[a-z]{2,15})?")) ) {
-			surname = inputSurame;
+	public void setSurname(String inputSurname) {
+		if((inputSurname != null) && (!inputSurname.isEmpty()) 
+				&& (inputSurname.matches("[A-Z]{1}[a-z]{2,15}([-]{1}[A-Z]{1}[a-z]{2,15})?"))    ) {
+			surname = inputSurname;
 		}
 		else {
 			surname = "Unknown";
 		}
 	}
 	public void setPersonCode(String inputPersonCode) {
-		if ((inputPersonCode != null) && (!inputPersonCode.isEmpty() 
-				&& inputPersonCode.matches("[0-9]{6}[-]{1}[0-9]{5}")) ) {
+		if ((inputPersonCode != null) && (!inputPersonCode.isEmpty()) 
+				&& (inputPersonCode.matches("[0-9]{6}[-]{1}[0-9]{5}")) ) {
 			personCode = inputPersonCode;
 		}
 		else {
@@ -71,7 +72,7 @@ public class Professor {
 		}
 	}
 	
-	//4.1. bezagrumenta konstruktors
+	//4.1. bezagrumenta konstruktors===========================================================
 	public Professor() {
 		setProfId();
 		setName("Reinis");
@@ -80,13 +81,20 @@ public class Professor {
 		setDegree(ProfDegree.bachelor);
 	}
 	
-	//4.2 argumenta konstruktors
-	public Professor(String inputName, String inputSurname, String inputPersonCode, ProfDegree degree) {
+	//4.2 argumenta konstruktors===========================================================
+	public Professor(String inputName, String inputSurname, String inputPersonCode, 
+			ProfDegree inputDegree) {
 		setProfId();
 		setName(inputName);
 		setSurname(inputSurname);
 		setPersonCode(inputPersonCode);
 		setDegree(inputDegree);
+	}
+	
+	// toString funkcija===========================================================
+	public String toString() {
+		String result = profId + ": " + name + " " + surname + " (" + personCode + ") " + degree;
+		return result;
 	}
 	
 	
