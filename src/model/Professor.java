@@ -3,12 +3,10 @@ package model;
 import model.enums.ProfDegree; 
 
 
-public class Professor {
+public class Professor extends Person {
 
 	private long profId;
-	private String name;
-	private String surname;
-	private String personCode;
+	//iznemt ara name surname person code jo tie ir ieksa person
 	private ProfDegree degree;
 	
 	private static long counter = 1000;
@@ -17,15 +15,7 @@ public class Professor {
 	public long getProfId() {
 		return profId;
 	}
-	public String getName() {
-		return name;
-	}
-	public String getSurname() {
-		return surname;
-	}
-	public String getPersonCode() {
-		return personCode;
-	}
+	//remove name surname and person code beacause that awas insid ethe person code
 	public ProfDegree getDegree() {
 		return degree;
 	}
@@ -37,32 +27,7 @@ public class Professor {
 		counter++;
 	}
 	String msg = ""; //parbaudes
-	public void setName(String inputName) {
-		if((inputName != null) && (!inputName.isEmpty()) && (inputName.matches("[A-Z]{1}[a-z]{2,15}([ ]{1}[A-Z]{1}[a-z]{2,15})?"))    ) {
-			name = inputName;
-		}
-		else {
-			name = "Unknown";
-		}
-	}
-	public void setSurname(String inputSurname) {
-		if((inputSurname != null) && (!inputSurname.isEmpty()) 
-				&& (inputSurname.matches("[A-Z]{1}[a-z]{2,15}([-]{1}[A-Z]{1}[a-z]{2,15})?"))    ) {
-			surname = inputSurname;
-		}
-		else {
-			surname = "Unknown";
-		}
-	}
-	public void setPersonCode(String inputPersonCode) {
-		if ((inputPersonCode != null) && (!inputPersonCode.isEmpty()) 
-				&& (inputPersonCode.matches("[0-9]{6}[-]{1}[0-9]{5}")) ) {
-			personCode = inputPersonCode;
-		}
-		else {
-			personCode = "Unknown";
-		}
-	}
+	//removed the name surname and persn code since that is inside the person codd
 	public void setDegree(ProfDegree inputDegree) {
 		if(inputDegree!=null) {
 			degree = inputDegree;
@@ -74,20 +39,15 @@ public class Professor {
 	
 	//4.1. bezagrumenta konstruktors===========================================================
 	public Professor() {
+		super("Reinis", "Vecvagars-Paruskins", "121212-56794");
 		setProfId();
-		setName("Reinis");
-		setSurname("Vecvagars-Paruskins");
-		setPersonCode("181818-12345");
 		setDegree(ProfDegree.bachelor);
 	}
 	
 	//4.2 argumenta konstruktors===========================================================
-	public Professor(String inputName, String inputSurname, String inputPersonCode, 
-			ProfDegree inputDegree) {
+	public Professor(String inputName, String inputSurname, String inputPersonCode, ProfDegree inputDegree) {
+		super(inputName, inputSurname, inputPersonCode);
 		setProfId();
-		setName(inputName);
-		setSurname(inputSurname);
-		setPersonCode(inputPersonCode);
 		setDegree(inputDegree);
 	}
 	
