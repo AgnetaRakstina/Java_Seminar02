@@ -2,47 +2,70 @@ package main;
 
 import model.Professor;
 import model.Student;
+
+import java.util.ArrayList;
+
 import model.Course;
 import model.Grade;
 import model.enums.ProfDegree;
 
 public class VeA_IS {
+	
+	private static ArrayList<Student> allStudents = new ArrayList<Student>();
+	private static ArrayList<Professor> allProfessors = new ArrayList<Professor>();
+	private static ArrayList<Course> allCourses = new ArrayList<Course>();
+	private static ArrayList<Grade> allGrades = new ArrayList<Grade>();
+	
 
 	public static void main(String[] args) {
 		System.out.println("=========== STUDENTS ===========");
 		//datu tips     noseaukums  = new konsturktors
 		Student			stud1		= new Student();
-		System.out.println(stud1);
 		Student stud2 = new Student("Rendijs", "Serna", "121234-45678");
-		System.out.println(stud2);
 		Student stud3 = new Student("671547", "Ser2d", null);
-		System.out.println(stud3);
+		allStudents.add(stud1);
+		allStudents.add(stud2);
+		allStudents.add(stud3);
+		
+		for(Student tempS : allStudents) {
+			System.out.println(tempS);
+		}
 		
 		System.out.println("=========== PROFESSORS ===========");
 		Professor prof1 = new Professor();
-		System.out.println(prof1);
-		
 		Professor prof2 = new Professor("Vairis", "Caune", "120914-12121", ProfDegree.phd);
-		System.out.println(prof2);
-		
 		Professor prof3 = new Professor("Galina", "Hilkevica", "12198-3456", ProfDegree.phd);
-		System.out.println(prof3);
+		allProfessors.add(prof1);
+		allProfessors.add(prof2);
+		allProfessors.add(prof3);
+		
+		for(Professor tempS : allProfessors) {
+			System.out.println(tempS);
+		}
 		
 		System.out.println("=========== COURSES ===========");
 		Course course1 = new Course();
-		System.out.println(course1);
 		Course course2 = new Course("Algoritmu teorija", (byte)3, prof2);
-		System.out.println(course2);
 		Course course3 = new Course("Matematiska analize", (byte)6, prof3);
-		System.out.println(course3);
+		allCourses.add(course1);
+		allCourses.add(course2);
+		allCourses.add(course3);
+		
+		for(Course tempS : allCourses) {
+			System.out.println(tempS);
+		}
 		
 		System.out.println("=========== GRADES ===========");
 		Grade grade1 = new Grade();
-		System.out.println(grade1);
 		Grade grade2 = new Grade(10, stud1, course1);
-		System.out.println(grade2);
 		Grade grade3 = new Grade(9, stud2, course2);
-		System.out.println(grade3);
+		allGrades.add(grade1);
+		allGrades.add(grade2);
+		allGrades.add(grade3);
+		
+		for(Grade tempS : allGrades) {
+			System.out.println(tempS);
+		}
 		
 	}
 	
