@@ -72,8 +72,14 @@ public class Course {
 		setProfessor(inputProfessor);
 	}
 	
-	// 6. 
+	// 6. toString funkcija
+	public String toString() {
+		String result = courseId + ": " + title + " (" + creditPoints + " KP), " + 
+		Professor.getName().charAt(0) + ". " + Professor.getSurname();
+		return result;
+	}
 	
+	//7. papildus funkcija
 	
 	
 	

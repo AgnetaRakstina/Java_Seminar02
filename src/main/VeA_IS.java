@@ -2,11 +2,13 @@ package main;
 
 import model.Professor;
 import model.Student;
+import model.Course;
 import model.enums.ProfDegree;
 
 public class VeA_IS {
 
 	public static void main(String[] args) {
+		System.out.println("=========== STUDENTS ===========");
 		//datu tips     noseaukums  = new konsturktors
 		Student			stud1		= new Student();
 		System.out.println(stud1);
@@ -15,7 +17,7 @@ public class VeA_IS {
 		Student stud3 = new Student("671547", "Ser2d", null);
 		System.out.println(stud3);
 		
-		
+		System.out.println("=========== PROFESSORS ===========");
 		Professor prof1 = new Professor();
 		System.out.println(prof1);
 		
@@ -24,6 +26,14 @@ public class VeA_IS {
 		
 		Professor prof3 = new Professor("Galina", "Hilkevica", "12198-3456", ProfDegree.phd);
 		System.out.println(prof3);
+		
+		System.out.println("=========== COURSES ===========");
+		Course course1 = new Course();
+		System.out.println(course1);
+		Course course2 = new Course("Algoritmu teorija", (byte)3, prof2);
+		System.out.println(course2);
+		Course course3 = new Course("Matematiska analize", (byte)6, prof3);
+		System.out.println(course3);
 		
 		
 	}
