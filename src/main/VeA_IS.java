@@ -67,9 +67,29 @@ public class VeA_IS {
 			System.out.println(tempS);
 		}
 		
+		System.out.println("=========== CRUD TESTING ===========");
+		try {
+			//izveido studentu
+			createStudent("Janis", "Berzins", "090512-23456");
+			System.out.println(allStudents);
+			//ja zinams id gribu visu objektu dabut
+			System.out.println(getStudentById(4));//Janis berzins
+			//update studentu
+			System.out.println(updateById(1, "Rendijs", "Jaukais"));
+			System.out.println(allStudents);
+			//Dzesana
+			deleteById(2); // tiek izdzests unknown students
+			System.out.println(allStudents);
+			}
+		catch (Exception e) {
+			System.out.println(e.getMessage());
+		}
+		
+		
+		
 		
 	}
-		//CRUD - Create, Retrieve, Update, Delete
+		//CRUD - Create, Retrieve, Update, Delete ====================================
 		
 	//C - create
 	public static void createStudent(String inputName, String inputSurname, String inputPersonCode) throws Exception {
