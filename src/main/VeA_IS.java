@@ -85,7 +85,19 @@ public class VeA_IS {
 			System.out.println(e.getMessage());
 		}
 		
+		System.out.println("=========== FILTER TESTING ===========");
+		try {
+			System.out.println(filterAllProfessorsWithSpecificDegree(ProfDegree.phd));//izvadit professorus ar gradu
+			
+			System.out.println("Rendija videja atzime ir " + calculateAVGgradeForStudent("121234-45678"));
+		}
+		catch (Exception e) {
+			System.out.println(e.getMessage());
+		}
 		
+		
+		
+	
 		
 		
 	}
@@ -141,5 +153,55 @@ public class VeA_IS {
 		Student studentForDeleting = getStudentById(id);
 		allStudents.remove(studentForDeleting);
 	}
+	
+	//izfiltret un atgriezt visus professorus kuru degree is master
+	public static ArrayList<Professor> filterAllProfessorsWithSpecificDegree(ProfDegree inputDegree) throws Exception {
+		if(inputDegree == null) {
+			throw new Exception("Neeksistejoss grads");
+		}
+		ArrayList<Professor> result = new ArrayList<Professor>(); // rezultatu array
+		for(Professor temP: allProfessors) {
+			if(temP.getDegree().equals(inputDegree)) {
+				result.add(temP); //pievieno ieksa rezultatu array/saraksta
+				//nevar reakstit result, jo savadak atgriezis tikai 1 professoru un parejie netiks apskatiti
+			}
+		}
+		if(result.isEmpty()) { // ja result saraksts ir tukss un nevienam nav tas inputDegree
+			throw new Exception("Sistema nav professoru ar " + inputDegree + " gradu"); 
+		}
+		return result;
+		
+	}
+	
+	public static float calculateAVGgradeForStudent(String personCode) throws Exception {
+		//parbaudam input mainigo
+		if(personCode == null || personCode.isEmpty() || !personCode.matches("[0-9]{6}[-]{1}[0-9]{5}")) {
+			throw new Exception("Nepareizi ievades dati");
+		}
+		//2 mainigie
+		int count = 0; //atzimes skaits
+		float sum = 0; //summa
+		for (Grade tempG : allGrades) {
+			if(tempG.getStudent().getPersonCode().equals(personCode)) {
+				count++;
+				sum = sum + tempG.getGradeValue();
+			}
+		}
+		if(count == 0) { // ja nav atzimes
+			throw new Exception("Studentam ar personu kodu " + personCode + " nav atzimju tapec nevar aprekinat.");
+		}
+		return (sum/count);
+		
+		
+		//ejam cauri visam atzimem for each ciklu
+		//ar if noskaidrojam vai knkretas atzimes ipasnieaka personas kods sakrit ar input
+		//summejam tas atzimes
+		//skaitam tas atzimes
+		
+		//atgriezam videjo vertibu
+		
+		
+	}
+	
 	
 }
