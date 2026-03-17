@@ -71,7 +71,7 @@ public class VeA_IS {
 	}
 		//CRUD - Create, Retrieve, Update, Delete
 		
-		//C - create
+	//C - create
 	public static void createStudent(String inputName, String inputSurname, String inputPersonCode) throws Exception {
 		//TODO - parbaudit ienakosos parametrus	
 		for(Student tempS : allStudents) {
@@ -84,7 +84,7 @@ public class VeA_IS {
 		allStudents.add(newStudent);
 	}
 	
-	//R - retrieve
+	//R - retrieve by id
 	public static Student getStudentById(long id) throws Exception {
 		
 		if(id < 0) {
@@ -100,8 +100,26 @@ public class VeA_IS {
 
 	}
 	
+	//U - update 
+	public static Student updateById(int id, String inputName, String inputSurname) throws Exception { //galvena seciba, vispirms id
+		Student studentForUpdating = getStudentById(id);
+		
+		//TODO parbaudit inputName and inputSurname
+		if(!studentForUpdating.getName().equals(inputName)) {
+			studentForUpdating.setName(inputName);
+		}
+		if(!studentForUpdating.getSurname().equals(inputSurname)) {
+			studentForUpdating.setSurname(inputSurname);
+		}
+		
+		return studentForUpdating;
+		
+	}
 	
-	
-	
+	//D - delete
+	public static void deleteById(int id) throws Exception {
+		Student studentForDeleting = getStudentById(id);
+		allStudents.remove(studentForDeleting);
+	}
 	
 }
