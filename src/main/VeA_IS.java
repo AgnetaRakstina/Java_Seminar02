@@ -1,47 +1,63 @@
 package main;
 
 import model.Professor;
+
 import model.Student;
 
 import java.util.ArrayList;
 
 import model.Course;
 import model.Grade;
+import model.Person;
+import model.Professor;
+import model.Student;
 import model.enums.ProfDegree;
 
 public class VeA_IS {
 	
-	private static ArrayList<Student> allStudents = new ArrayList<Student>();
-	private static ArrayList<Professor> allProfessors = new ArrayList<Professor>();
+	private static ArrayList<Person> allPersons = new ArrayList<Person>(); // tie var glabat personas, studentus un profesorus
+	//private static ArrayList<Student> allStudents = new ArrayList<Student>();
+	//private static ArrayList<Professor> allProfessors = new ArrayList<Professor>();
 	private static ArrayList<Course> allCourses = new ArrayList<Course>();
 	private static ArrayList<Grade> allGrades = new ArrayList<Grade>();
 	
 
 	public static void main(String[] args) {
-		System.out.println("=========== STUDENTS ===========");
+		//System.out.println("=========== STUDENTS ===========");
 		//datu tips     noseaukums  = new konsturktors
 		Student			stud1		= new Student();
 		Student stud2 = new Student("Rendijs", "Serna", "121234-45678");
 		Student stud3 = new Student("671547", "Ser2d", null);
-		allStudents.add(stud1);
-		allStudents.add(stud2);
-		allStudents.add(stud3);
+		allPersons.add(stud1);
+		allPersons.add(stud2);
+		allPersons.add(stud3);
 		
-		for(Student tempS : allStudents) {
-			System.out.println(tempS);
-		}
 		
-		System.out.println("=========== PROFESSORS ===========");
+		//System.out.println("=========== PROFESSORS ===========");
 		Professor prof1 = new Professor();
 		Professor prof2 = new Professor("Vairis", "Caune", "120914-12121", ProfDegree.phd);
 		Professor prof3 = new Professor("Galina", "Hilkevica", "12198-3456", ProfDegree.phd);
-		allProfessors.add(prof1);
-		allProfessors.add(prof2);
-		allProfessors.add(prof3);
+		allPersons.add(prof1);
+		allPersons.add(prof2);
+		allPersons.add(prof3);
+
 		
-		for(Professor tempS : allProfessors) {
-			System.out.println(tempS);
+		System.out.println("Visas personas: " + allPersons);
+		
+		System.out.println("=========== STUDENTS ===========");
+		for(Person tempP: allPersons) {
+			if(tempP instanceof Student) {// parbauda vai persona ir students
+				System.out.println(tempP);
+			}
 		}
+		
+		System.out.println("=========== PROFESSORS ===========");
+		for(Person tempP: allPersons) {
+			if(tempP instanceof Professor) {// parbauda vai persona ir students
+				System.out.println(tempP);
+			}
+		}
+		
 		
 		System.out.println("=========== COURSES ===========");
 		Course course1 = new Course();
@@ -71,15 +87,27 @@ public class VeA_IS {
 		try {
 			//izveido studentu
 			createStudent("Janis", "Berzins", "090512-23456");
-			System.out.println(allStudents);
+			for(Person tempP: allPersons) {
+				if(tempP instanceof Professor) {// parbauda vai persona ir students
+					System.out.println(tempP);
+				}
+			}
 			//ja zinams id gribu visu objektu dabut
 			System.out.println(getStudentById(4));//Janis berzins
 			//update studentu
 			System.out.println(updateById(1, "Rendijs", "Jaukais"));
-			System.out.println(allStudents);
+			for(Person tempP: allPersons) {
+				if(tempP instanceof Professor) {// parbauda vai persona ir students
+					System.out.println(tempP);
+				}
+			}
 			//Dzesana
 			deleteById(2); // tiek izdzests unknown students
-			System.out.println(allStudents);
+			for(Person tempP: allPersons) {
+				if(tempP instanceof Professor) {// parbauda vai persona ir students
+					System.out.println(tempP);
+				}
+			}
 			}
 		catch (Exception e) {
 			System.out.println(e.getMessage());
@@ -106,14 +134,14 @@ public class VeA_IS {
 	//C - create
 	public static void createStudent(String inputName, String inputSurname, String inputPersonCode) throws Exception {
 		//TODO - parbaudit ienakosos parametrus	
-		for(Student tempS : allStudents) {
-			if(tempS.getPersonCode().equals(inputPersonCode)) { //parbauda vai dotais personas kods eksiste, ir pareizs
+		for(Person tempS : allPersons) {
+			if(tempS instanceof Student && tempS.getPersonCode().equals(inputPersonCode)) { //parbauda vai dotais personas kods eksiste, ir pareizs
 				throw new Exception("Tads students jau eksiste"); //VAJADZIGS PRIEKS TESTA
 			}
 		}
 		
 		Student newStudent = new Student(inputName, inputSurname, inputPersonCode);
-		allStudents.add(newStudent);
+		allPersons.add(newStudent);
 	}
 	
 	//R - retrieve by id
@@ -123,9 +151,12 @@ public class VeA_IS {
 			throw new Exception("Id nevar but negativs");
 		}
 		
-		for (Student tempS : allStudents) {
-			if(tempS.getStudId() == id) {
-				return tempS;
+		for (Person tempS : allPersons) {
+			if(tempS instanceof Student) {
+				Student stud = (Student)tempS; //ka objektu piesaista studenta tipa mainigajam
+				if(stud.getStudId() == id) {
+					return stud;
+				}
 			}
 		}
 		throw new Exception("Students ar id " + id + " neeksiste!");
@@ -151,7 +182,7 @@ public class VeA_IS {
 	//D - delete
 	public static void deleteById(int id) throws Exception {
 		Student studentForDeleting = getStudentById(id);
-		allStudents.remove(studentForDeleting);
+		allPersons.remove(studentForDeleting);
 	}
 	
 	//izfiltret un atgriezt visus professorus kuru degree is master
@@ -160,10 +191,14 @@ public class VeA_IS {
 			throw new Exception("Neeksistejoss grads");
 		}
 		ArrayList<Professor> result = new ArrayList<Professor>(); // rezultatu array
-		for(Professor temP: allProfessors) {
-			if(temP.getDegree().equals(inputDegree)) {
-				result.add(temP); //pievieno ieksa rezultatu array/saraksta
-				//nevar reakstit result, jo savadak atgriezis tikai 1 professoru un parejie netiks apskatiti
+		for(Person temP: allPersons) {
+			if(temP instanceof Professor) { //vai peronsa ir professors
+				Professor prof = (Professor)temP;
+			
+				if(prof.getDegree().equals(inputDegree)) {
+					result.add(prof); //pievieno ieksa rezultatu array/saraksta
+					//nevar reakstit result, jo savadak atgriezis tikai 1 professoru un parejie netiks apskatiti
+				}
 			}
 		}
 		if(result.isEmpty()) { // ja result saraksts ir tukss un nevienam nav tas inputDegree
